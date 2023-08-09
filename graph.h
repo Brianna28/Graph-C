@@ -4,6 +4,7 @@
 #include <assert.h>
 #define MAT_AT(g,i,j) (g).data[(i)*g.size + (j)]
 #define MAT_AT_PTR(g,i,j) (g->data)[(i)*(g->size) + (j)]
+
 //TODO:
 //Add adding nodes to graphs 
 //Add removing nodes from graph
@@ -48,7 +49,6 @@ Graph iden(Graph m){
 
 
 void init_graph_from_array(Graph g, size_t array[N][N]){
-  assert(N == g.size);
   for (size_t i = 0; i<g.size;++i){
     for (size_t j = 0; j<g.size;++j){
       MAT_AT(g,i,j) +=  array[i][j];
