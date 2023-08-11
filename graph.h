@@ -6,8 +6,9 @@
 #define MAT_AT_PTR(g,i,j) (g->data)[(i)*(g->size) + (j)]
 
 //TODO:
-//Add adding nodes to graphs 
-//Add removing nodes from graph
+//Add adding nodes to graphs [X]
+//Add removing nodes from graph [X]
+//Add https://github/nothings/stb implementation
 
 
 size_t N; //Size of matrix
