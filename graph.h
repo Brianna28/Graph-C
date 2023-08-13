@@ -8,7 +8,6 @@
 //TODO:
 //Add adding nodes to graphs [X]
 //Add removing nodes from graph [X]
-//Add https://github/nothings/stb implementation
 
 
 size_t N; //Size of matrix
