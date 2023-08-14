@@ -20,7 +20,7 @@ typedef struct{
 Graph new_graph(size_t size){
   Graph g;
   g.size = size;
-  g.data = malloc(sizeof(int)*size*size);
+  g.data = (int*) malloc(sizeof(int)*size*size);
   return g;
 }
 
@@ -58,7 +58,7 @@ void init_graph_from_array(Graph g, size_t array[N][N]){
 
 int *row_i(Graph g, size_t row_index){
   assert(row_index < g.size);
-  int* row = malloc(sizeof(int)*g.size);
+  int* row = (int*) malloc(sizeof(int)*g.size);
   for (size_t i = 0; i<g.size; ++i){
     row[i] = MAT_AT(g,row_index,i);
   }
@@ -66,7 +66,7 @@ int *row_i(Graph g, size_t row_index){
 }
 int* col_i(Graph g, size_t col_index){
   assert(col_index < g.size);
-  int* col = malloc(sizeof(int)*g.size);
+  int* col = (int*) malloc(sizeof(int)*g.size);
   for (size_t i= 0; i<g.size; ++i){
     col[i] = MAT_AT(g,i,col_index); 
   }
@@ -84,7 +84,7 @@ void add_node(Graph *g, int *connections, size_t num_connections) {
   size_t new_size = g->size + 1;
 
   // Reallocate memory for the new matrix
-  int *new_data = malloc(sizeof(int) * new_size * new_size);
+  int *new_data = (int*) malloc(sizeof(int) * new_size * new_size);
 
   // Copy the existing matrix data to the new matrix
   for (size_t i = 0; i < g->size; ++i) {

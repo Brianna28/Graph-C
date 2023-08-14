@@ -25,6 +25,7 @@ int main()
   add_node(&G,connect,numConnections);
   //rem_node(&G,0);
   graph_print(G);
+  free(G.data);
   //free(C.data);
   //free(st_row);
   return 0;
