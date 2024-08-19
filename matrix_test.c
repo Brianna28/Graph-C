@@ -1,13 +1,11 @@
 #include "graph.h"
 
-
-int main()
-{ 
+int main() {
   size_t size = 3;
   N = size;
   Graph G = new_graph(size);
-  size_t array[3][3] = {{1,2,3},{4,5,6},{7,8,9}};
-  init_graph_from_array(G,array);
+  size_t array[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+  init_graph_from_array(G, array);
   graph_print(G);
 #if 0
   Graph C = iden(new_graph(4));
@@ -19,14 +17,12 @@ int main()
   printf("%d\n", mat_at(G,0,0));
   //free(G.data);
 #endif
-  int connect[] = {0,1};
-
-  size_t numConnections = sizeof(connect)/sizeof(connect[0]);  // Increase the size of the matrix and copy old data
-  add_node(&G,connect,numConnections);
-  //rem_node(&G,0);
+  int connect[] = {0, 1};
+  add_node(&G, connect);
+  // rem_node(&G,0);
   graph_print(G);
-  free(G.data);
-  //free(C.data);
-  //free(st_row);
+  free_graph(&G);
+  // free(C.data);
+  // free(st_row);
   return 0;
 }
