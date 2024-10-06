@@ -12,9 +12,24 @@
 size_t N; // Size of matrix
 
 typedef struct {
+  int head;
+  int *con_points;
+  int size;
+
+} Connector;
+
+typedef struct {
   size_t size; // We will only use square matrices
   int *data;   // the pointer to the matrix we need
 } Graph;
+
+Connector create_connect(int head, int *con_points) {
+  Connector C;
+  C.head = head;
+  C.con_points = con_points;
+  C.size = sizeof(con_points) / sizeof(con_points[0]);
+  return C;
+}
 
 Graph new_graph(size_t size) {
   Graph g;
@@ -75,9 +90,8 @@ int *col_i(Graph g, size_t col_index) {
 
 int mat_at(Graph g, int row, int col) { return MAT_AT(g, row, col); }
 
-void add_node(Graph *g, int *connections) {
+void add_node(Graph *g) {
   size_t new_size = g->size + 1;
-  size_t numConnections = sizeof(connections) / sizeof(connections[0]);
   // sizeof(connect) /
   // Reallocate memory    sizeof(connect[0]); for the new matrix
   int *new_data = (int *)malloc(sizeof(int) * new_size * new_size);
@@ -95,17 +109,19 @@ void add_node(Graph *g, int *connections) {
     new_data[g->size * new_size + i] = 0;
   }
 
-  for (size_t i = 0; i < numConnections; ++i) {
-    if (connections[i] >= 0 && connections[i] < g->size) {
-      new_data[connections[i] * new_size + g->size] = 1;
-      new_data[g->size * new_size + connections[i]] = 1;
-    }
-  }
-
   // Update the graph properties
   free_graph(g);
   g->size = new_size;
   g->data = new_data;
+}
+
+void connect_node(Graph *g, Connector c) {
+  for (size_t i = 0; i < c.size; ++i) {
+    if (c.con_points[i] >= 0 && c.con_points[i] < g->size) {
+      MAT_AT_PTR(g, c.head, c.con_points[i]) = 1;
+      MAT_AT_PTR(g, c.con_points[i], c.head) = 1;
+    }
+  }
 }
 
 void rem_node(Graph *g, size_t n) {
